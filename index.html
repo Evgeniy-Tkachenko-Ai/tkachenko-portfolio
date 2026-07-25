@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Евгений Ткаченко - ИИ-автоматизация для бизнеса</title>
+  <meta name="description" content="Строю ИИ-агентов и автоматизирую бизнес-процессы: Claude Code, n8n, RAG, CRM. Пять рабочих проектов, весь код открыт на GitHub.">
+  <meta name="author" content="Евгений Ткаченко">
+  <meta name="theme-color" content="#011425">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Евгений Ткаченко - ИИ-автоматизация для бизнеса">
+  <meta property="og:description" content="Строю ИИ-агентов и автоматизирую бизнес-процессы: Claude Code, n8n, RAG, CRM. Пять рабочих проектов, весь код открыт на GitHub.">
+  <meta property="og:image" content="/photo.jpg">
+  <meta property="og:locale" content="ru_RU">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Евгений Ткаченко - ИИ-автоматизация для бизнеса">
+  <meta name="twitter:description" content="Строю ИИ-агентов и автоматизирую бизнес-процессы: Claude Code, n8n, RAG, CRM. Пять рабочих проектов, весь код открыт на GitHub.">
+  <meta name="twitter:image" content="/photo.jpg">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%2304203A'/><path d='M40 13 24 51' stroke='%235C7C89' stroke-width='7' stroke-linecap='round'/></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260725j">
+</head>
+<body>
+
+  <canvas class="net-canvas" aria-hidden="true"></canvas>
+
+  <div class="cursor-ring" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+  <div class="page">
+
+    <header class="header" id="top">
+      <div class="container header-inner">
+        <a class="logo" href="#top">
+          <svg class="logo-chip" viewBox="0 0 32 32" width="80" height="80" aria-hidden="true">
+            <defs>
+              <linearGradient id="chipBody" x1="6" y1="5" x2="26" y2="27" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#cadde4"/>
+                <stop offset=".5" stop-color="#7e9dab"/>
+                <stop offset="1" stop-color="#3f5661"/>
+              </linearGradient>
+              <linearGradient id="chipDie" x1="12" y1="12" x2="20" y2="20" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#607c88"/>
+                <stop offset="1" stop-color="#2e434c"/>
+              </linearGradient>
+              <radialGradient id="chipSpec" cx=".33" cy=".28" r=".72">
+                <stop offset="0" stop-color="#ffffff" stop-opacity=".55"/>
+                <stop offset=".55" stop-color="#ffffff" stop-opacity="0"/>
+              </radialGradient>
+              <filter id="chipSh" x="-50%" y="-50%" width="200%" height="200%">
+                <feDropShadow dx="0" dy="1.4" stdDeviation="1.5" flood-color="#00070f" flood-opacity=".55"/>
+              </filter>
+            </defs>
+            <g filter="url(#chipSh)">
+              <g fill="#5a7480">
+                <rect x="11" y="4.3" width="1.7" height="3.7" rx=".6"/>
+                <rect x="15.15" y="4.3" width="1.7" height="3.7" rx=".6"/>
+                <rect x="19.3" y="4.3" width="1.7" height="3.7" rx=".6"/>
+                <rect x="11" y="24" width="1.7" height="3.7" rx=".6"/>
+                <rect x="15.15" y="24" width="1.7" height="3.7" rx=".6"/>
+                <rect x="19.3" y="24" width="1.7" height="3.7" rx=".6"/>
+                <rect x="4.3" y="11" width="3.7" height="1.7" rx=".6"/>
+                <rect x="4.3" y="15.15" width="3.7" height="1.7" rx=".6"/>
+                <rect x="4.3" y="19.3" width="3.7" height="1.7" rx=".6"/>
+                <rect x="24" y="11" width="3.7" height="1.7" rx=".6"/>
+                <rect x="24" y="15.15" width="3.7" height="1.7" rx=".6"/>
+                <rect x="24" y="19.3" width="3.7" height="1.7" rx=".6"/>
+              </g>
+              <rect x="7" y="7" width="18" height="18" rx="3.6" fill="url(#chipBody)"/>
+              <rect x="7" y="7" width="18" height="18" rx="3.6" fill="url(#chipSpec)"/>
+              <rect x="7.6" y="7.6" width="16.8" height="16.8" rx="3.1" fill="none" stroke="#dce9ee" stroke-opacity=".5" stroke-width=".7"/>
+              <rect x="11.3" y="11.3" width="9.4" height="9.4" rx="2.1" fill="url(#chipDie)" stroke="#20313a" stroke-width=".7"/>
+              <rect x="11.9" y="11.9" width="8.2" height="8.2" rx="1.6" fill="none" stroke="#9ab6c1" stroke-opacity=".3" stroke-width=".5"/>
+              <circle cx="16" cy="16" r="1.9" fill="#bcd4dd" fill-opacity=".8"/>
+            </g>
+          </svg>
+          <span class="logo-slash">/</span> <span class="logo-name">Евгений Ткаченко</span></a>
+        <nav class="nav" aria-label="Основная навигация">
+          <div class="nav-links">
+            <a href="#cases">Кейсы</a>
+            <a href="#stack">Стек</a>
+            <a href="#about">Про меня</a>
+            <a href="#contact">Контакты</a>
+          </div>
+          <a class="btn btn-primary btn-sm nav-cta" href="https://t.me/aixors" target="_blank" rel="noopener">Написать</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="scroll-progress" aria-hidden="true"></div>
+
+    <div class="garland" aria-hidden="true">
+      <span class="garland-line"></span>
+      <div class="gitem" style="top: 3%;"><div class="gitem-swing"><span class="gthread"></span><span class="gchip">Claude</span></div></div>
+      <div class="gitem" style="top: 8%;"><div class="gitem-swing"><span class="gthread"></span><span class="gchip">Gemini</span></div></div>
+      <div class="gitem" style="top: 13%;"><div class="gitem-swing"><span class="gthread"></span><span class="gchip">ChatGPT</span></div></div>
+      <div class="gitem" style="top: 19%;"><div class="gitem-swing"><span class="gthread"></span><span class="gchip">Grok</span></div></div>
+      <div class="gitem" style="top: 24%;"><div class="gitem-swing"><span class="gthread"></span><span class="gchip">OpenRouter</span></div></div>
+      <div class="gitem" style="top: 29%;"><div class="gitem-swing"><span class="gthread"></span><span class="gchip">n8n</span></div></div>
+      <div class="gitem" style="top: 34%;"><div class="gitem-swing"><span class="gthread"></span><span class="gchip">Claude Code</span></div></div>
+      <div class="gitem" style="top: 40%;"><div class="gitem-swing"><span class="gthread"></span><span class="gchip">Antigravity</span></div></div>
+      <div class="gitem" style="top: 45%;"><div class="gitem-swing"><span class="gthread"></span><span class="gchip">Python</span></div></div>
+      <div class="gitem" style="top: 50%;"><div class="gitem-swing"><span class="gthread"></span><span class="gchip">Bitrix24</span></div></div>
+      <div class="gitem" style="top: 55%;"><div class="gitem-swing"><span class="gthread"></span><span class="gchip">amoCRM</span></div></div>
+      <div class="gitem" style="top: 60%;"><div class="gitem-swing"><span class="gthread"></span><span class="gchip">GreenAPI</span></div></div>
+      <div class="gitem" style="top: 66%;"><div class="gitem-swing"><span class="gthread"></span><span class="gchip">Google Calendar</span></div></div>
+      <div class="gitem" style="top: 71%;"><div class="gitem-swing"><span class="gthread"></span><span class="gchip">RAG</span></div></div>
+      <div class="gitem" style="top: 76%;"><div class="gitem-swing"><span class="gthread"></span><span class="gchip">Qdrant</span></div></div>
+      <div class="gitem" style="top: 81%;"><div class="gitem-swing"><span class="gthread"></span><span class="gchip">Supabase</span></div></div>
+      <div class="gitem" style="top: 87%;"><div class="gitem-swing"><span class="gthread"></span><span class="gchip">Telegram Bot API</span></div></div>
+      <div class="gitem" style="top: 92%;"><div class="gitem-swing"><span class="gthread"></span><span class="gchip">WhatsApp</span></div></div>
+      <div class="gitem" style="top: 97%;"><div class="gitem-swing"><span class="gthread"></span><span class="gchip">Groq API</span></div></div>
+    </div>
+
+    <main>
+
+      <!-- Герой -->
+      <section class="hero">
+        <div class="container hero-inner">
+          <div class="hero-text">
+            <span class="kicker">/ ИИ-АВТОМАТИЗАЦИЯ</span>
+            <h1>Евгений Ткаченко</h1>
+            <p class="hero-sub">Строю ИИ-агентов и автоматизирую бизнес-процессы: Claude Code, n8n, RAG, CRM</p>
+            <p class="hero-desc">Пять рабочих проектов, весь код открыт на GitHub.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#cases">Кейсы</a>
+              <a class="btn btn-ghost" href="https://t.me/aixors" target="_blank" rel="noopener">Связаться</a>
+            </div>
+          </div>
+          <div class="hero-photo">
+            <div class="photo-ring">
+              <img src="photo.jpg" alt="Евгений Ткаченко" width="300" height="300">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Кейсы -->
+      <section class="cases section" id="cases">
+        <div class="container">
+          <div class="section-head">
+            <span class="kicker">/ КЕЙСЫ</span>
+            <h2 class="section-title">Пять проектов, которые работают</h2>
+          </div>
+          <div class="cases-grid">
+
+            <article class="case-card">
+              <img src="Luna.jpg" alt="Воркфлоу Luna в n8n" loading="lazy">
+              <div class="case-body">
+                <span class="case-niche">/ Бьюти</span>
+                <h3 class="case-title">Luna</h3>
+                <div class="case-block">
+                  <span class="case-block-label">Задача</span>
+                  <p class="case-block-text">Клиенты пишут в салон в любое время суток, а администратор физически не может отвечать ночью и в нерабочие часы.</p>
+                </div>
+                <div class="case-block">
+                  <span class="case-block-label">Решение</span>
+                  <p class="case-block-text">RAG-бот на n8n отвечает на вопросы по базе услуг и цен, сам предлагает время и записывает через Google Calendar, заявка сразу падает в Bitrix24.</p>
+                </div>
+                <div class="case-block">
+                  <span class="case-block-label">Результат</span>
+                  <p class="case-block-text">Клиент может записаться в два часа ночи без участия администратора, сделка в CRM создаётся автоматически.</p>
+                </div>
+                <ul class="case-tags">
+                  <li>n8n</li>
+                  <li>RAG</li>
+                  <li>Qdrant</li>
+                  <li>OpenRouter</li>
+                  <li>Google Calendar</li>
+                  <li>GreenAPI</li>
+                  <li>Bitrix24</li>
+                </ul>
+                <a class="case-link" href="https://github.com/Evgeniy-Tkachenko-Ai/luna-ai-salon-bot" target="_blank" rel="noopener">Код на GitHub <span class="arr">→</span></a>
+              </div>
+            </article>
+
+            <article class="case-card">
+              <img src="Gym.jpg" alt="Iron House: amoCRM, Google Calendar и бот в Telegram" loading="lazy">
+              <div class="case-body">
+                <span class="case-niche">/ Фитнес</span>
+                <h3 class="case-title">Iron House</h3>
+                <div class="case-block">
+                  <span class="case-block-label">Задача</span>
+                  <p class="case-block-text">Нужно было проверить, переносится ли архитектура Luna на другую нишу и другую CRM без пересборки с нуля.</p>
+                </div>
+                <div class="case-block">
+                  <span class="case-block-label">Решение</span>
+                  <p class="case-block-text">Тот же RAG-движок адаптирован под фитнес-клуб - база абонементов и тренеров, запись на индивидуальные тренировки, интеграция с amoCRM вместо Bitrix24.</p>
+                </div>
+                <div class="case-block">
+                  <span class="case-block-label">Результат</span>
+                  <p class="case-block-text">Полный цикл диалог, запись в календарь, сделка в amoCRM, уведомление админу подтверждён живым прогоном.</p>
+                </div>
+                <ul class="case-tags">
+                  <li>n8n</li>
+                  <li>RAG</li>
+                  <li>Qdrant</li>
+                  <li>amoCRM</li>
+                  <li>Telegram</li>
+                  <li>Google Calendar</li>
+                </ul>
+                <a class="case-link" href="https://github.com/Evgeniy-Tkachenko-Ai/gym-bot-iron-house" target="_blank" rel="noopener">Код на GitHub <span class="arr">→</span></a>
+              </div>
+            </article>
+
+            <article class="case-card">
+              <img src="Job-search-bot.jpg" alt="Telegram-бот с топ-15 вакансий по скорингу" loading="lazy">
+              <div class="case-body">
+                <span class="case-niche">/ Python</span>
+                <h3 class="case-title">Агент поиска работы</h3>
+                <div class="case-block">
+                  <span class="case-block-label">Задача</span>
+                  <p class="case-block-text">Вручную каждый день пересматривать десятки вакансий на hh.ru и Хабр Карьере под конкретный стек - трата времени.</p>
+                </div>
+                <div class="case-block">
+                  <span class="case-block-label">Решение</span>
+                  <p class="case-block-text">Python-скрипт парсит вакансии, Claude оценивает совпадение по стеку и формирует топ-15, бот присылает подборку в Telegram каждое утро в 9:00 по расписанию.</p>
+                </div>
+                <div class="case-block">
+                  <span class="case-block-label">Результат</span>
+                  <p class="case-block-text">Подборка приходит автоматически, без ручного мониторинга площадок.</p>
+                </div>
+                <ul class="case-tags">
+                  <li>Python</li>
+                  <li>Claude API</li>
+                  <li>BeautifulSoup</li>
+                  <li>Telegram</li>
+                  <li>launchd</li>
+                </ul>
+                <a class="case-link" href="https://github.com/Evgeniy-Tkachenko-Ai/job-search-agent" target="_blank" rel="noopener">Код на GitHub <span class="arr">→</span></a>
+              </div>
+            </article>
+
+            <article class="case-card">
+              <img src="task-master.jpg" alt="TaskMaster: доска задач в Notion и бот в Telegram" loading="lazy">
+              <div class="case-body">
+                <span class="case-niche">/ Продуктивность</span>
+                <h3 class="case-title">TaskMaster</h3>
+                <div class="case-block">
+                  <span class="case-block-label">Задача</span>
+                  <p class="case-block-text">Задачи руководителя разбросаны по переписке и голосовым сообщениям, ничего не структурировано.</p>
+                </div>
+                <div class="case-block">
+                  <span class="case-block-label">Решение</span>
+                  <p class="case-block-text">Telegram-бот принимает текст и голос, классифицирует задачу через Gemini и создаёт карточку в Notion, утром присылает сводку по горящему.</p>
+                </div>
+                <div class="case-block">
+                  <span class="case-block-label">Результат</span>
+                  <p class="case-block-text">Голосовая заметка превращается в структурированную карточку без ручного заполнения полей.</p>
+                </div>
+                <ul class="case-tags">
+                  <li>Python</li>
+                  <li>Gemini</li>
+                  <li>Notion API</li>
+                  <li>Telegram</li>
+                  <li>Whisper</li>
+                </ul>
+                <a class="case-link" href="https://github.com/Evgeniy-Tkachenko-Ai/task-master-agent" target="_blank" rel="noopener">Код на GitHub <span class="arr">→</span></a>
+              </div>
+            </article>
+
+            <article class="case-card">
+              <div class="case-logos">
+                <div class="logo-half"><img src="amoCRM.jpg" alt="amoCRM" loading="lazy"></div>
+                <div class="logo-half"><img src="bitrix24.jpeg" alt="Bitrix24" loading="lazy"></div>
+              </div>
+              <div class="case-body">
+                <span class="case-niche">/ CRM</span>
+                <h3 class="case-title">CRM-интеграция</h3>
+                <div class="case-block">
+                  <span class="case-block-label">Задача</span>
+                  <p class="case-block-text">Заявка из мессенджера потенциального клиента нигде не фиксируется как сделка, менеджер узнаёт о ней постфактум.</p>
+                </div>
+                <div class="case-block">
+                  <span class="case-block-label">Решение</span>
+                  <p class="case-block-text">Событие-триггер через HTTP-запрос к REST API создаёт сделку напрямую в Bitrix24 или amoCRM с нужными полями.</p>
+                </div>
+                <div class="case-block">
+                  <span class="case-block-label">Результат</span>
+                  <p class="case-block-text">Сделка появляется в CRM в момент заявки, без промежуточного шага "кто-то вручную перенёс".</p>
+                </div>
+                <ul class="case-tags">
+                  <li>Bitrix24</li>
+                  <li>amoCRM</li>
+                  <li>REST API</li>
+                  <li>Webhooks</li>
+                  <li>OAuth2</li>
+                </ul>
+                <a class="case-link" href="https://github.com/Evgeniy-Tkachenko-Ai/luna-ai-salon-bot" target="_blank" rel="noopener">Код на GitHub <span class="arr">→</span></a>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Стек -->
+      <section class="stack section" id="stack">
+        <div class="container">
+          <div class="section-head">
+            <span class="kicker">/ СТЕК</span>
+            <h2 class="section-title">На чём строю</h2>
+          </div>
+          <div class="stack-cols">
+
+            <div class="stack-cat">
+              <span class="stack-cat-name">ИИ / LLM</span>
+              <div class="tool-grid">
+                <div class="tool"><img class="tool-ico" src="https://cdn.simpleicons.org/claude/5C7C89" alt="" width="34" height="34" loading="lazy"><span class="tool-name">Claude</span></div>
+                <div class="tool"><img class="tool-ico" src="https://cdn.simpleicons.org/googlegemini/5C7C89" alt="" width="34" height="34" loading="lazy"><span class="tool-name">Gemini</span></div>
+                <div class="tool"><span class="tool-mono">GPT</span><span class="tool-name">ChatGPT</span></div>
+                <div class="tool"><span class="tool-mono">Gk</span><span class="tool-name">Grok</span></div>
+                <div class="tool"><span class="tool-mono">Gq</span><span class="tool-name">Groq API</span></div>
+                <div class="tool"><img class="tool-ico" src="https://cdn.simpleicons.org/openrouter/5C7C89" alt="" width="34" height="34" loading="lazy"><span class="tool-name">OpenRouter</span></div>
+              </div>
+            </div>
+
+            <div class="stack-cat">
+              <span class="stack-cat-name">Автоматизация</span>
+              <div class="tool-grid">
+                <div class="tool"><img class="tool-ico" src="https://cdn.simpleicons.org/n8n/5C7C89" alt="" width="34" height="34" loading="lazy"><span class="tool-name">n8n</span></div>
+                <div class="tool"><img class="tool-ico" src="https://cdn.simpleicons.org/anthropic/5C7C89" alt="" width="34" height="34" loading="lazy"><span class="tool-name">Claude Code</span></div>
+                <div class="tool"><span class="tool-mono">Ag</span><span class="tool-name">Antigravity</span></div>
+                <div class="tool"><img class="tool-ico" src="https://cdn.simpleicons.org/python/5C7C89" alt="" width="34" height="34" loading="lazy"><span class="tool-name">Python</span></div>
+              </div>
+            </div>
+
+            <div class="stack-cat">
+              <span class="stack-cat-name">CRM и интеграции</span>
+              <div class="tool-grid">
+                <div class="tool"><span class="tool-mono">B24</span><span class="tool-name">Bitrix24</span></div>
+                <div class="tool"><span class="tool-mono">amo</span><span class="tool-name">amoCRM</span></div>
+                <div class="tool"><span class="tool-mono">GA</span><span class="tool-name">GreenAPI</span></div>
+                <div class="tool"><img class="tool-ico" src="https://cdn.simpleicons.org/googlecalendar/5C7C89" alt="" width="34" height="34" loading="lazy"><span class="tool-name">Google Calendar</span></div>
+              </div>
+            </div>
+
+            <div class="stack-cat">
+              <span class="stack-cat-name">RAG и данные</span>
+              <div class="tool-grid">
+                <div class="tool"><span class="tool-mono">RAG</span><span class="tool-name">RAG</span></div>
+                <div class="tool"><img class="tool-ico" src="https://cdn.simpleicons.org/qdrant/5C7C89" alt="" width="34" height="34" loading="lazy"><span class="tool-name">Qdrant</span></div>
+                <div class="tool"><img class="tool-ico" src="https://cdn.simpleicons.org/supabase/5C7C89" alt="" width="34" height="34" loading="lazy"><span class="tool-name">Supabase</span></div>
+              </div>
+            </div>
+
+            <div class="stack-cat">
+              <span class="stack-cat-name">Каналы</span>
+              <div class="tool-grid">
+                <div class="tool"><img class="tool-ico" src="https://cdn.simpleicons.org/telegram/5C7C89" alt="" width="34" height="34" loading="lazy"><span class="tool-name">Telegram Bot API</span></div>
+                <div class="tool"><img class="tool-ico" src="https://cdn.simpleicons.org/whatsapp/5C7C89" alt="" width="34" height="34" loading="lazy"><span class="tool-name">WhatsApp</span></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- Про меня -->
+      <section class="about section" id="about">
+        <div class="container">
+          <div class="section-head">
+            <span class="kicker">/ ПРО МЕНЯ</span>
+            <h2 class="section-title">Путь в автоматизацию</h2>
+          </div>
+          <div class="about-grid">
+            <div class="about-text">
+              <p>С конца 2022 плотно занимаюсь искусственным интеллектом: курсы Kaggle и Google по AI-агентам, курсы по n8n и промпт-инжинирингу.</p>
+              <p>С марта 2026 сфокусирован только на ИИ-автоматизации. Claude Code - основной инструмент, n8n и Google Antigravity в связке.</p>
+              <p>Каждый день изучаю что-то новое и не боюсь тестировать. Так как технологии меняются стремительнее, чем когда-либо прежде, держать руку на пульсе считаю необходимым.</p>
+              <p>С июня веду блог про ии-автоматизацию, где показываю путь без прикрас - грабли, мысли и рабочие кейсы. Блог - это творчество. Автоматизация - ремесло.</p>
+              <p>Цель простая и амбициозная: стать одним из топовых ИИ-автоматизаторов. За этим будущее, и я хочу быть в нём не наблюдателем, а тем, кто строит и приносит реальную пользу.</p>
+            </div>
+            <div class="about-photo">
+              <img src="about-photo.jpg" alt="Евгений Ткаченко за ноутбуком на балконе с видом на Батуми" width="1170" height="2007" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Контакты -->
+      <section class="contacts section" id="contact">
+        <div class="container">
+          <div class="section-head">
+            <span class="kicker">/ КОНТАКТЫ</span>
+            <h2 class="section-title">Контакты и ссылки</h2>
+          </div>
+          <div class="contacts-grid">
+
+            <a class="contact-card" href="https://github.com/Evgeniy-Tkachenko-Ai" target="_blank" rel="noopener">
+              <img class="contact-ico" src="https://cdn.simpleicons.org/github/5C7C89" alt="" width="40" height="40" loading="lazy">
+              <span class="contact-name">GitHub</span>
+              <span class="contact-btn">Смотреть код <span class="arr">→</span></span>
+            </a>
+
+            <a class="contact-card" href="https://t.me/aixors" target="_blank" rel="noopener">
+              <img class="contact-ico" src="https://cdn.simpleicons.org/telegram/5C7C89" alt="" width="40" height="40" loading="lazy">
+              <span class="contact-name">Telegram</span>
+              <span class="contact-btn">Написать <span class="arr">→</span></span>
+            </a>
+
+            <a class="contact-card" href="https://instagram.com/dnevnik_ai_avtomatizatora" target="_blank" rel="noopener">
+              <img class="contact-ico" src="https://cdn.simpleicons.org/instagram/5C7C89" alt="" width="40" height="40" loading="lazy">
+              <span class="contact-name">Instagram</span>
+              <span class="contact-btn">Смотреть блог <span class="arr">→</span></span>
+            </a>
+
+            <a class="contact-card" href="mailto:evgeniytkachenko999777@gmail.com">
+              <img class="contact-ico" src="https://cdn.simpleicons.org/gmail/5C7C89" alt="" width="40" height="40" loading="lazy">
+              <span class="contact-name">Email</span>
+              <span class="contact-btn">Написать <span class="arr">→</span></span>
+            </a>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <p class="footer-tagline">ИИ-автоматизация и агенты для бизнеса</p>
+        <nav class="footer-nav" aria-label="Навигация в футере">
+          <a href="#cases">Кейсы</a>
+          <a href="#stack">Стек</a>
+          <a href="#about">Про меня</a>
+          <a href="#contact">Контакты</a>
+        </nav>
+        <p class="footer-copy">© 2026 Евгений Ткаченко</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+  (function () {
+    'use strict';
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var pointerFine = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+      && !('ontouchstart' in window);
+    var doc = document.documentElement;
+
+    /* ---------- шапка: blur при скролле + индикатор прогресса ---------- */
+    var header = document.querySelector('.header');
+    var progressBar = document.querySelector('.scroll-progress');
+    function onScroll() {
+      var y = window.scrollY;
+      header.classList.toggle('scrolled', y > 8);
+      if (progressBar) {
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        var pct = max > 0 ? (y / max) * 100 : 0;
+        progressBar.style.width = pct + '%';
+      }
+    }
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+
+    /* ---------- логотип: плавно наверх (id=top на fixed-шапке якорем не скроллит) ---------- */
+    var logo = document.querySelector('.logo');
+    if (logo) {
+      logo.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+      });
+    }
+
+    /* ---------- живой фон: сеть узлов ---------- */
+    var canvas = document.querySelector('.net-canvas');
+    if (canvas && !reduced) {
+      var ctx = canvas.getContext('2d');
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var w = 0, h = 0, nodes = [], raf = 0;
+
+      function resize() {
+        w = window.innerWidth;
+        h = window.innerHeight;
+        canvas.width = w * dpr;
+        canvas.height = h * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        var target = 120;
+        nodes = [];
+        for (var i = 0; i < target; i++) {
+          nodes.push({
+            x: Math.random() * w,
+            y: Math.random() * h,
+            vx: (Math.random() - 0.5) * 0.35,
+            vy: (Math.random() - 0.5) * 0.35
+          });
+        }
+      }
+
+      var LINK = 150;
+      function frame() {
+        ctx.clearRect(0, 0, w, h);
+        for (var i = 0; i < nodes.length; i++) {
+          var n = nodes[i];
+          n.x += n.vx;
+          n.y += n.vy;
+          if (n.x < 0 || n.x > w) n.vx *= -1;
+          if (n.y < 0 || n.y > h) n.vy *= -1;
+        }
+        for (var a = 0; a < nodes.length; a++) {
+          for (var b = a + 1; b < nodes.length; b++) {
+            var dx = nodes[a].x - nodes[b].x;
+            var dy = nodes[a].y - nodes[b].y;
+            var dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < LINK) {
+              ctx.strokeStyle = 'rgba(122, 154, 168, ' + (0.55 * (1 - dist / LINK)).toFixed(3) + ')';
+              ctx.lineWidth = 1.5;
+              ctx.beginPath();
+              ctx.moveTo(nodes[a].x, nodes[a].y);
+              ctx.lineTo(nodes[b].x, nodes[b].y);
+              ctx.stroke();
+            }
+          }
+        }
+        ctx.shadowBlur = 7;
+        ctx.shadowColor = 'rgba(92, 124, 137, 0.6)';
+        ctx.fillStyle = 'rgba(142, 172, 186, 0.88)';
+        for (var k = 0; k < nodes.length; k++) {
+          ctx.beginPath();
+          ctx.arc(nodes[k].x, nodes[k].y, 2.6, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.shadowBlur = 0;
+        raf = requestAnimationFrame(frame);
+      }
+
+      resize();
+      frame();
+      var rt;
+      window.addEventListener('resize', function () {
+        clearTimeout(rt);
+        rt = setTimeout(resize, 200);
+      });
+    }
+
+    /* ---------- scroll reveal (Intersection Observer, срабатывает один раз) ---------- */
+    if (!reduced && 'IntersectionObserver' in window) {
+      doc.classList.add('js-reveal');
+      var revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          el.classList.add('is-visible');
+          setTimeout(function () { el.classList.add('rv-done'); }, 650);
+          revealObserver.unobserve(el);
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+      document.querySelectorAll('.section-head, .case-card, .tool, .contact-card, .about-grid')
+        .forEach(function (el) { revealObserver.observe(el); });
+    }
+
+    if (!pointerFine) return;
+
+    /* ---------- кастомный курсор ---------- */
+    var dot = document.querySelector('.cursor-dot');
+    var ring = document.querySelector('.cursor-ring');
+    if (dot && ring) {
+      doc.classList.add('cursor-on', 'cursor-active');
+      /* стартовая позиция - центр экрана (видно и без движения мыши) */
+      var mx = window.innerWidth / 2, my = window.innerHeight / 2;
+      var rx = mx, ry = my;
+      dot.style.transform = 'translate(' + mx + 'px,' + my + 'px) translate(-50%,-50%)';
+      ring.style.transform = 'translate(' + rx + 'px,' + ry + 'px) translate(-50%,-50%)';
+
+      window.addEventListener('mousemove', function (e) {
+        mx = e.clientX;
+        my = e.clientY;
+        dot.style.transform = 'translate(' + mx + 'px,' + my + 'px) translate(-50%,-50%)';
+      }, { passive: true });
+
+      function ringLoop() {
+        rx += (mx - rx) * 0.16;
+        ry += (my - ry) * 0.16;
+        ring.style.transform = 'translate(' + rx.toFixed(2) + 'px,' + ry.toFixed(2) + 'px) translate(-50%,-50%)';
+        requestAnimationFrame(ringLoop);
+      }
+      ringLoop();
+
+      document.addEventListener('mouseover', function (e) {
+        if (e.target.closest('a, button')) doc.classList.add('cursor-hover');
+      });
+      document.addEventListener('mouseout', function (e) {
+        if (e.target.closest('a, button')) doc.classList.remove('cursor-hover');
+      });
+      document.addEventListener('mouseleave', function () {
+        doc.classList.remove('cursor-active');
+      });
+      document.addEventListener('mouseenter', function () {
+        doc.classList.add('cursor-active');
+      });
+    }
+
+    /* ---------- параллакс фото за курсором ---------- */
+    var hero = document.querySelector('.hero');
+    var photo = document.querySelector('.hero-photo');
+    if (hero && photo) {
+      var tpx = 0, tpy = 0, cpx = 0, cpy = 0, pRaf = 0;
+      function pLoop() {
+        cpx += (tpx - cpx) * 0.08;
+        cpy += (tpy - cpy) * 0.08;
+        photo.style.transform = 'translate(' + (cpx * 8).toFixed(2) + 'px,' + (cpy * 8).toFixed(2) + 'px)';
+        if (Math.abs(tpx - cpx) > 0.002 || Math.abs(tpy - cpy) > 0.002) {
+          pRaf = requestAnimationFrame(pLoop);
+        } else {
+          pRaf = 0;
+        }
+      }
+      hero.addEventListener('mousemove', function (e) {
+        var r = hero.getBoundingClientRect();
+        tpx = (e.clientX - r.left) / r.width - 0.5;
+        tpy = (e.clientY - r.top) / r.height - 0.5;
+        if (!pRaf) pRaf = requestAnimationFrame(pLoop);
+      });
+      hero.addEventListener('mouseleave', function () {
+        tpx = 0; tpy = 0;
+        if (!pRaf) pRaf = requestAnimationFrame(pLoop);
+      });
+    }
+  })();
+  </script>
+
+</body>
+</html>
