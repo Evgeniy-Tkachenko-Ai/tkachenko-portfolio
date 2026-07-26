@@ -730,6 +730,12 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 18px;
+  background: rgba(4, 32, 58, 0.72);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: clamp(20px, 3vw, 32px);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 
 .about-text p {
