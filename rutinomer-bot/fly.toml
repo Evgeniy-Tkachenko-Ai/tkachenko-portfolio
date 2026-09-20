@@ -1,0 +1,27 @@
+# Fly.io: единственный из опробованных вариантов, где бот реально не спит
+# и база живет на постоянном диске. Рекомендуемый вариант, см. docs/DEPLOY.md.
+app = "rutinomer-bot"
+primary_region = "waw"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "8080"
+  DB_PATH = "/data/bot.db"
+
+[[mounts]]
+  source = "bot_data"
+  destination = "/data"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  # Ключевое: не давать машине останавливаться, иначе апдейты будут копиться.
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 1
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "256mb"

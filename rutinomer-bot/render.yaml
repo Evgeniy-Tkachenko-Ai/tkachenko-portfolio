@@ -1,0 +1,22 @@
+# Render: бесплатный web service. Порт нужен обязательно, иначе деплой не пройдет.
+# Важно: на free-плане нет постоянного диска, база обнулится при редеплое.
+# Подробности и альтернативы - в docs/DEPLOY.md.
+services:
+  - type: web
+    name: rutinomer-bot
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m bot
+    healthCheckPath: /health
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: ADMIN_CHAT_ID
+        sync: false
+      - key: KEEPALIVE_URL
+        sync: false
+      - key: PYTHON_VERSION
+        value: "3.12.6"
